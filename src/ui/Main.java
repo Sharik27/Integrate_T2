@@ -59,8 +59,13 @@ public class Main{
 			break;
 
 			case 3:
+            addCapsule();
+            addEmployee();
 			
 			break;
+
+            case 4:
+            break;
 
 			case 0:
 			System.out.println("exit");
@@ -203,6 +208,57 @@ public class Main{
         controller.addStage(initialDate, finalDate);
         
     }
+
+    public void addCapsule(){
+        String id;
+        String description;
+        String typeCapsule = "";
+        boolean approval = false;
+        int option = 0;
+
+        System.out.println("Type id:");
+        id = reader.next();
+
+        System.out.println("Type description:");
+        description = reader.next();
+
+        System.out.println("Type capsule:");
+        System.out.println("1. Technial");
+        System.out.println("2. Management");
+        System.out.println("3. Control");
+        System.out.println("4. Experience");
+        option = reader.nextInt();
+
+        if(option == 1){
+            typeCapsule = "Technial";
+        }else if(option == 2 ){
+            typeCapsule = "Management";
+        }
+        else if(option == 3 ){
+            typeCapsule = "Control";
+        }
+        else if(option == 4 ){
+            typeCapsule = "Experience";
+        }
+
+        controller.addCapsule(id, description, typeCapsule, approval);
+
+    }public void addEmployee(){
+        String name;
+        String position;
+
+        System.out.println("Type the name employee:");
+        name = reader.next();
+    
+        System.out.println("Type the position employee:");
+        position =reader.next(); 
+    
+        String msg = controller.addEmployee(name, position);
+        System.out.println(msg);
+
+     }
+
+
     
 
 	

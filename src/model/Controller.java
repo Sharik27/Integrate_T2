@@ -5,12 +5,17 @@ import java.util.Calendar;
 
 public class Controller {
 
+	private StageProject[] stages;
 	private Project[] projects;
+	private Capsule[] capsules;
 	private static final int SIZE = 10;
+	private static final int STAGES = 50;
 
 	public Controller() {
 
 		projects = new Project[SIZE];
+		stages = new StageProject[STAGES];
+		capsules = new Capsule[SIZE];
 	
 	}
 	
@@ -67,5 +72,25 @@ public class Controller {
 		return msg;
 
 
+	}
+
+	public String addCapsule(String id, String description, String typeCapusule, boolean approval){
+		String msg = "No stage registered";
+		
+		if(projects[0] != null){
+			Capsule capsule = new Capsule(id, description, typeCapusule, approval);
+			msg = stages[0].addCapsule(capsule);
+		}
+		return msg;
+	}
+
+	public String addEmployee(String name, String position){
+		String msg = "No project registered";
+		
+		if(projects[0] != null){
+			Employee employee = new Employee(name, position);
+			msg = capsules[0].addEmployee(employee);
+		}
+		return msg;
 	}
 }
