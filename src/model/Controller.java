@@ -48,41 +48,24 @@ public class Controller {
         return pos;
     }
 
-	//Incomplete
-	// Date class also has their own before() and after() method
-	public void searchProjectsAfterDate(String nameProject) {
-
-		boolean isFound= false;
-
-		for(int i = 0; i<SIZE && !isFound; i++){
-			if(projects[i].getName().equalsIgnoreCase(nameProject)){
-				isFound = true;
-                System.out.println("The end date of the project is: "+projects[i].getFinalDateFormated());
-               
-			}else {
-				isFound = true;
-				System.out.println("Project not foundo");
-			}
-		}
+	public String addStage(Calendar initialDate, Calendar finalDate){
+		String msg = "No project registered";
 		
-
-	}
-	
-	//Incomplete
-	// Date class also has their own before() and after() method
-	public void searchProjectsBeforeDate(String nameProject){
-
-		boolean isFound= false;
-
-		for(int i = 0; i<SIZE && !isFound; i++){
-			if(projects[i].getName().equalsIgnoreCase(nameProject)){
-				isFound = true;
-				
-                System.out.println("the project start date is: "+projects[i].getInitialDateFormated());
-			}else{
-                isFound = true;
-                System.out.println("Project not found");
-			}
+		if(projects[0] != null){
+			StageProject stageProject = new StageProject(initialDate, finalDate);
+			msg = projects[0].addStage(stageProject);
 		}
+		return msg;
+	}
+
+	public String culminateStage(String nameSatge){
+		String msg = "No Stage registered";
+
+		if(projects[0] != null){
+			msg = projects[0].culminateStage(nameSatge);
+		}
+		return msg;
+
+
 	}
 }

@@ -36,10 +36,13 @@ public class Main{
 
 	// Incomplete
 	public void menu() {
-		System.out.println("1.RegisterProject");
-		System.out.println("2. searchProjectsAfterDate");
-		System.out.println("3. searchProjectsBeforeDate");
-		System.out.println("0. Exit");
+
+	System.out.println("1. Register project");
+    System.out.println("2. Culminate stage");
+    System.out.println("3. Register capsule");
+    System.out.println("4. Approval capsule ");
+    System.out.println("5. Publication capsule");
+    System.out.println("0. Exit");
 
 	}
 
@@ -48,10 +51,11 @@ public class Main{
 			case 1:
 			registerProject();
             addManager();
+            addStage();
 			break;
 
 			case 2:
-			
+			culminateStage();
 			break;
 
 			case 3:
@@ -124,18 +128,82 @@ public class Main{
     }
     
     public void addManager(){
-            String name;
-            String phone;
+        String name;
+        String phone;
     
-            System.out.println("Type the name project manager:");
-            name = reader.next();
+        System.out.println("Type the name project manager:");
+        name = reader.next();
         
-            System.out.println("Type the phone project manager:");
-            phone =reader.next(); 
+        System.out.println("Type the phone project manager:");
+        phone =reader.next(); 
         
-            String msg = controller.addManager(name, phone);
-            System.out.println(msg);
+        String msg = controller.addManager(name, phone);
+        System.out.println(msg);
     }
+
+    public void addStage(){
+        Calendar initialDate;
+        Calendar finalDate;
+        int monthInitial;
+        int monthFinal;
+        int monthFinal2 = 0;
+    
+        System.out.println("After a few months, the stage begins:");
+        monthInitial = reader.nextInt();
+        initialDate = Calendar.getInstance();
+        initialDate.add(Calendar.MONTH, monthInitial);
+        String timeStamp = formatter.format(initialDate.getTime());
+        System.out.println("The start date is: "+timeStamp);
+    
+        System.out.println("Enter in months how long the stage will last:");
+        monthFinal = reader.nextInt();
+        monthFinal2 = monthFinal+monthInitial;
+        finalDate = Calendar.getInstance();
+        finalDate.add(Calendar.MONTH, monthFinal2);
+        String timeStamp2 = formatter.format(finalDate.getTime());
+        System.out.println("The end date is: "+timeStamp2);
+    
+        controller.addStage(initialDate, finalDate);
+    
+    }
+
+    public void culminateStage(){
+        String nameStage;
+        Calendar finishStage;
+        Calendar initialDate;
+        Calendar finalDate;
+        int monthInitial;
+        int monthFinal;
+        int monthFinal2 = 0;
+
+        System.out.println("Type name stage:");
+        nameStage = reader.next();
+
+        finishStage = Calendar.getInstance();
+	    String timeStamp = formatter.format(finishStage.getTime());
+        System.out.println("The end date is: "+timeStamp);
+
+        controller.culminateStage(nameStage);
+
+        System.out.println("After a few months, the project begins:");
+        monthInitial = reader.nextInt();
+        initialDate = Calendar.getInstance();
+        initialDate.add(Calendar.MONTH, monthInitial);
+        String timeStamp2 = formatter.format(initialDate.getTime());
+        System.out.println("The start date is: "+timeStamp2);
+
+        System.out.println("Enter in months how long the project will last:");
+        monthFinal = reader.nextInt();
+        monthFinal2 = monthFinal+monthInitial;
+        finalDate = Calendar.getInstance();
+        finalDate.add(Calendar.MONTH, monthFinal2);
+        String timeStamp3 = formatter.format(finalDate.getTime());
+        System.out.println("The end date is: "+timeStamp3);
+
+        controller.addStage(initialDate, finalDate);
+        
+    }
+    
 
 	
 }
