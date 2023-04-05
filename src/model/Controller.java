@@ -102,4 +102,13 @@ public class Controller {
 		}
 		return msg;
 	}
+
+	public String publicationCapsule(String id){
+		String msg = "No stage registered";
+		
+		if(projects[0] != null){
+			msg = stages[0].publicationCapsule(id);
+		}
+		return msg;
+	}
 }

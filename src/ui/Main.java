@@ -67,6 +67,10 @@ public class Main{
             approvalCapsule();
             break;
 
+            case 5:
+            publicationCapsule();
+            break;
+
 			case 0:
 			System.out.println("exit");
 			break;
@@ -267,5 +271,14 @@ public class Main{
         id = reader.next();
 
         controller.approvalCapsule(id);
-    }	
+    }
+    
+    public void publicationCapsule(){
+        String id;
+
+        System.out.println("Type ID the capsule:");
+        id = reader.next();
+
+        controller.publicationCapsule(id);
+    }
 }

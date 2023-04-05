@@ -74,4 +74,21 @@ public class StageProject {
 		return pos;
 	}
 
+    public String publicationCapsule(String id){
+        String msg = "Capsule have not been publication";
+        int pos = searhCapsules(id);
+        
+        if(pos != -1){
+         boolean approval = capsules[pos].getApproval();
+
+         if (approval == true){
+            System.out.println("www."+capsules[pos].getId()+".com");
+            msg = "The capsule has publication";
+         }
+        }
+       
+
+        return msg;
+    }
+
 }
