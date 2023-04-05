@@ -60,11 +60,11 @@ public class Main{
 
 			case 3:
             addCapsule();
-            addEmployee();
-			
+            addEmployee();			
 			break;
 
             case 4:
+            approvalCapsule();
             break;
 
 			case 0:
@@ -243,7 +243,9 @@ public class Main{
 
         controller.addCapsule(id, description, typeCapsule, approval);
 
-    }public void addEmployee(){
+    }
+    
+    public void addEmployee(){
         String name;
         String position;
 
@@ -256,10 +258,14 @@ public class Main{
         String msg = controller.addEmployee(name, position);
         System.out.println(msg);
 
-     }
+    }
 
+    public void approvalCapsule(){
+        String id;
 
-    
+        System.out.println("Type ID the capsule:");
+        id = reader.next();
 
-	
+        controller.approvalCapsule(id);
+    }	
 }

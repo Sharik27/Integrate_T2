@@ -51,4 +51,27 @@ public class StageProject {
 		return pos; 
 	}
 
+    public String approvalCapsule(String id){
+		String msg = "Capsule have not been approval";
+		int pos = searhCapsules(id);
+		if(pos != -1){
+			capsules[pos].setApproval(true);
+			msg= "The capsule has approval";
+		}
+
+		return msg;
+	}
+
+    public  int searhCapsules(String id){
+		boolean isFound= false;
+		int pos = -1;
+		for(int i = 0; i<SIZE && !isFound; i++){
+			if(capsules[i].getId().equalsIgnoreCase(id)){
+				isFound = true;
+				pos = i;
+			}
+		}
+		return pos;
+	}
+
 }

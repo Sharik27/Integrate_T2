@@ -93,4 +93,13 @@ public class Controller {
 		}
 		return msg;
 	}
+
+	public String approvalCapsule(String id){
+		String msg = "No capsule registered";
+		
+		if(projects[0] != null){
+			msg = stages[0].approvalCapsule(id);
+		}
+		return msg;
+	}
 }
