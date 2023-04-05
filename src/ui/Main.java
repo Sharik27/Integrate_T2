@@ -13,7 +13,7 @@ public class Main{
     private DateFormat formatter;
 
 	public Main() {
-
+ 
 		reader = new Scanner(System.in);
 		controller = new Controller();
         formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -34,18 +34,17 @@ public class Main{
 
 	}
 
-	// Incomplete
-	public void menu() {
+	// menu displayed to the user
+	public void menu(){
 
-	System.out.println("1. Register project");
-    System.out.println("2. Culminate stage");
-    System.out.println("3. Register capsule");
-    System.out.println("4. Approval capsule ");
-    System.out.println("5. Publication capsule");
-    System.out.println("0. Exit");
-
+	    System.out.println("1. Register project");
+        System.out.println("2. Culminate stage");
+        System.out.println("3. Register capsule");
+        System.out.println("4. Approval capsule ");
+        System.out.println("5. Publication capsule");
+        System.out.println("0. Exit");
 	}
-
+// cases with their methods
 	public void executeoption(int option){
 		switch(option){
 			case 1:
@@ -95,7 +94,7 @@ public class Main{
         }
         return option;
     }
-
+// message displayed to the user on the screen  
 	public void registerProject() {
         String name;
         String clientName;
