@@ -238,6 +238,12 @@ public class Project{
 		return msg;
 	}
 
+	public String listAllCapsule(String stageName){
+		int pos = searhStages(stageName);
+		String msg = stageProjects[pos].listCapsules()+"\n";
+		return msg;
+	}
+
 	
 }
 

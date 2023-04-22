@@ -148,4 +148,15 @@ public class StageProject {
 		return msg;
 	}
 
+	public String listCapsules(){
+		String msg = "";
+
+		for(int i= 0; i<CAPSULE_SIZE; i++){
+			if(capsules[i]!= null){
+				msg += capsules[i].toString();
+			}
+		}
+		return msg;
+	}
+
 }
