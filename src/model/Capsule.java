@@ -2,10 +2,10 @@ package model;
 
 public class Capsule {
     
-    private static final int SIZE =10;
+    private static final int EMPLOYEE_SIZE =10;
     private String id;
     private String description;
-    private String typeCapsule;
+    private TypeCapsule typeCapsule;
     private boolean approval;
     private Employee[] employees;
 /**
@@ -15,13 +15,13 @@ public class Capsule {
  * @param typeCapsule to add a capsule type
  * @param approval to approval capsule
  * */
-    public Capsule(String id, String description, String typeCapsule, boolean approval){
+    public Capsule(String id, String description, TypeCapsule typeCapsule, boolean approval){
         this.id = id;
         this.description = description;
         this.typeCapsule = typeCapsule;
         this.approval = approval;
 
-        employees = new Employee[SIZE];
+        employees = new Employee[EMPLOYEE_SIZE];
     }
 /**
  * 
@@ -35,7 +35,7 @@ public class Capsule {
         return description;
     }
 
-    public String getTypeCapsule(){
+    public TypeCapsule getTypeCapsule(){
         return typeCapsule;
     }
 
@@ -54,7 +54,7 @@ public class Capsule {
         this.description = description;
     }
 
-    public void setTypeCapsule(String typeCapsule){
+    public void setTypeCapsule(TypeCapsule typeCapsule){
         this.typeCapsule = typeCapsule;
     }
 
@@ -76,6 +76,18 @@ public class Capsule {
 
 		return msg;
 	}
+
+    public  int searhEmployee(String name){
+		boolean isFound= false;
+		int pos = -1;
+		for(int i = 0; i<EMPLOYEE_SIZE && !isFound; i++){
+			if(employees[i].getName().equalsIgnoreCase(name)){
+				isFound = true;
+				pos = i;
+			}
+		}
+		return pos;
+	}
 /**
  * getFirstValidPosition: search in array if exist one valid position
 * @return pos -1 if the position does not exist, a number in [0, 9] if exist a valid position
@@ -84,7 +96,7 @@ public class Capsule {
     public int getFirstValidPosition(){
 		int pos = -1; 
 		boolean isFound = false; 
-		for(int i = 0; i < SIZE && !isFound; i++){
+		for(int i = 0; i < EMPLOYEE_SIZE && !isFound; i++){
 			if(employees[i] == null){
 				pos = i; 
 				isFound = true;

@@ -9,17 +9,16 @@ import java.util.Calendar;
 
 public class Controller {
 
-	private StageProject[] stages;
+	
 	private Project[] projects;
-	private Capsule[] capsules;
-	private static final int SIZE = 10;
-	private static final int STAGES = 50;
+	
+	private static final int PROJECT_SIZE = 10;
+	
 
 	public Controller() {
 
-		projects = new Project[SIZE];
-		stages = new StageProject[STAGES];
-		capsules = new Capsule[SIZE];
+		projects = new Project[PROJECT_SIZE];
+		
 	
 	}
 	/**
@@ -46,13 +45,16 @@ public class Controller {
  * @param phone to add the manager phone
  * @return is a message saying that the project is not registered
  * */
-	public String addManager(String name, String phone){
+	public String addManager(String projectName, String name, String phone){
+		int pos = searchProyect(projectName);
 		String msg = "No project registered";
-		
-		if(projects[0] != null){
-			Manager manager = new Manager(name, phone);
-			msg = projects[0].addManager(manager);
+		if(pos !=-1){
+			if(projects[pos] != null){
+				Manager manager = new Manager(name, phone);
+				msg = projects[pos].addManager(manager);
+			}
 		}
+		
 		return msg;
 	}
 /**
@@ -62,7 +64,7 @@ public class Controller {
 	public int getFirstValidPosition(){
         int pos = -1;
         boolean isFound = false; 
-        for(int i = 0; i< SIZE && !isFound; i++){
+        for(int i = 0; i< PROJECT_SIZE && !isFound; i++){
             if(projects[i] == null){
                 pos = i;
                 isFound = true;
@@ -77,29 +79,47 @@ public class Controller {
  * @param finalDateto add the final date 
  * @return if the project is registered, the stage is created
  * */
-	public String addStage(Calendar initialDate, Calendar finalDate){
+	public String addStage(String projectName, Calendar initialDate, Calendar finalDate){
+		int pos = searchProyect(projectName);
 		String msg = "No project registered";
 		
-		if(projects[0] != null){
-			StageProject stageProject = new StageProject(initialDate, finalDate);
-			msg = projects[0].addStage(stageProject);
+		if(pos !=-1){
+			if(projects[0] != null){
+			StageProject start = new StageProject("Start", "Active", initialDate, finalDate);
+			StageProject analysis = new StageProject("Analysis", "Desactivate", initialDate, finalDate);
+			StageProject design = new StageProject("Design", "Desactivate", initialDate, finalDate);
+			StageProject execution= new StageProject("Execution", "Desactivate", initialDate, finalDate);
+			StageProject closureMonitoring= new StageProject("Closure and Monitoring", "Desactivate", initialDate, finalDate);
+			StageProject control = new StageProject("Control", "Desactivate", initialDate, finalDate);
+			projects[pos].addStage(start);
+			projects[pos].addStage(analysis);
+			projects[pos].addStage(design);
+			projects[pos].addStage(execution);
+			projects[pos].addStage(closureMonitoring);
+			projects[pos].addStage(control);
+
+			}
 		}
+		
 		return msg;
 	}
 
 	/**
 	 * 
-	 * @param nameSatge to add the stage name
+	 * @param stageName to add the stage name
 	 * @returnis a message that saving the stage is not registered
 	 * */
-	public String culminateStage(String nameSatge){
+	public String culminateStage(String projectName, String stageName){
+		int pos = searchProyect(projectName);
 		String msg = "No Stage registered";
 
-		if(projects[0] != null){
-			msg = projects[0].culminateStage(nameSatge);
+		if(pos !=-1){
+			if(projects[pos] != null){
+				msg = projects[pos].culminateStage(stageName);
+			}
 		}
-		return msg;
 
+		return msg;
 
 	}
 /**
@@ -110,28 +130,48 @@ public class Controller {
  * @param approval condition of the capsule
  * @return is a message where it says if the stage is not registered
  * */
-	public String addCapsule(String id, String description, String typeCapusule, boolean approval){
-		String msg = "No stage registered";
+	public String addCapsule(String projectName, String stageName, String id, String description, int option, boolean approval){
+		int pos = searchProyect(projectName);
+		String msg = "";
 		
-		if(projects[0] != null){
-			Capsule capsule = new Capsule(id, description, typeCapusule, approval);
-			msg = stages[0].addCapsule(capsule);
+		if( pos!= -1){
+			TypeCapsule typeCapusule;
+			if(option == 1){
+				typeCapusule = TypeCapsule.TECHNICAL;
+			}else if(option == 2){
+				typeCapusule = TypeCapsule.MANAGEMENT;
+			}else if(option == 3){
+				typeCapusule = TypeCapsule.DOMAIN;
+			}else{
+				typeCapusule = TypeCapsule.EXPERIENCES;
+			}
+			if(projects[pos] != null){
+				Capsule capsule = new Capsule(id, description, typeCapusule, approval);
+				msg = projects[pos].addCapsule(stageName,capsule);
+			}
 		}
+
 		return msg;
-	}
+			
+	}		
+	
 /**
  * 
  * @param name to add the employee name
  * @param position to add the employee position
  * @return is a message saying that the project is not registered
  * */
-	public String addEmployee(String name, String position){
+	public String addEmployee(String projectName, String id,String name, String position){
+		int pos = searchProyect(projectName);
 		String msg = "No project registered";
-		
-		if(projects[0] != null){
-			Employee employee = new Employee(name, position);
-			msg = capsules[0].addEmployee(employee);
+
+		if(pos!= -1){
+			if(projects[pos] != null){
+				Employee employee = new Employee(name, position);
+				msg = projects[pos].addEmployee(id,employee);
+			}
 		}
+		
 		return msg;
 	}
 
@@ -140,12 +180,16 @@ public class Controller {
 	 * @param id to add the capsule identifier and to know if it is approved
 	 * @return is a message saying that the capsule is not registered
 	 * */
-	public String approvalCapsule(String id){
+	public String approvalCapsule(String projectName, String stageName, String id){
+		int pos = searchProyect(projectName);
 		String msg = "No capsule registered";
+
+		if(pos!= -1){
+			if(projects[pos] != null){
+				msg = projects[pos].approvalCapsule(stageName, id);
+			}
+		}	
 		
-		if(projects[0] != null){
-			msg = stages[0].approvalCapsule(id);
-		}
 		return msg;
 	}
 
@@ -154,12 +198,29 @@ public class Controller {
 	 * @param id to add an identifier to the capsule and know if it is approved for publication
 	 * @return 
 	 * */
-	public String publicationCapsule(String id){
+	public String publicationCapsule(String projectName, String stageName, String id){
+		int pos = searchProyect(projectName);
 		String msg = "No stage registered";
-		
-		if(projects[0] != null){
-			msg = stages[0].publicationCapsule(id);
+
+		if(pos != -1){
+			if(projects[pos] != null){
+				msg = projects[pos].publicationCapsule(stageName,id);
+			}
 		}
+				
 		return msg;
+	}
+
+	public int searchProyect(String projectName){
+		boolean isFound = false;
+		int pos = -1;
+		for(int i = 0; i<PROJECT_SIZE && !isFound; i++){
+			if(projects[i].getName().equalsIgnoreCase(projectName)){
+				isFound = true;
+				pos = i;
+			}
+		}
+		return pos;
+
 	}
 }

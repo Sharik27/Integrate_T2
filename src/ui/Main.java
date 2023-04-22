@@ -136,25 +136,33 @@ public class Main{
     }
     
     public void addManager(){
+        String projectName;
         String name;
         String phone;
     
+        System.out.println("type the name project");
+        projectName = reader.next();
+
         System.out.println("Type the name project manager:");
         name = reader.next();
         
         System.out.println("Type the phone project manager:");
-        phone =reader.next(); 
+        phone = reader.next(); 
         
-        String msg = controller.addManager(name, phone);
+        String msg = controller.addManager(projectName, name, phone);
         System.out.println(msg);
     }
 
     public void addStage(){
+        String projectName;
         Calendar initialDate;
         Calendar finalDate;
         int monthInitial;
         int monthFinal;
         int monthFinal2 = 0;
+
+        System.out.println("Type the name project");
+        projectName = reader.next();
     
         System.out.println("After a few months, the stage begins:");
         monthInitial = reader.nextInt();
@@ -171,19 +179,18 @@ public class Main{
         String timeStamp2 = formatter.format(finalDate.getTime());
         System.out.println("The end date is: "+timeStamp2);
     
-        controller.addStage(initialDate, finalDate);
+        controller.addStage(projectName, initialDate, finalDate);
     
     }
 
     public void culminateStage(){
+        String projectName;
         String nameStage;
         Calendar finishStage;
-        Calendar initialDate;
-        Calendar finalDate;
-        int monthInitial;
-        int monthFinal;
-        int monthFinal2 = 0;
 
+        System.out.println("Type the name project");
+        projectName= reader.next();
+       
         System.out.println("Type name stage:");
         nameStage = reader.next();
 
@@ -191,33 +198,24 @@ public class Main{
 	    String timeStamp = formatter.format(finishStage.getTime());
         System.out.println("The end date is: "+timeStamp);
 
-        controller.culminateStage(nameStage);
-
-        System.out.println("After a few months, the project begins:");
-        monthInitial = reader.nextInt();
-        initialDate = Calendar.getInstance();
-        initialDate.add(Calendar.MONTH, monthInitial);
-        String timeStamp2 = formatter.format(initialDate.getTime());
-        System.out.println("The start date is: "+timeStamp2);
-
-        System.out.println("Enter in months how long the project will last:");
-        monthFinal = reader.nextInt();
-        monthFinal2 = monthFinal+monthInitial;
-        finalDate = Calendar.getInstance();
-        finalDate.add(Calendar.MONTH, monthFinal2);
-        String timeStamp3 = formatter.format(finalDate.getTime());
-        System.out.println("The end date is: "+timeStamp3);
-
-        controller.addStage(initialDate, finalDate);
+        controller.culminateStage(projectName, nameStage);
+        addStage();
         
     }
 
     public void addCapsule(){
+        String projectName;
+        String stageName;
         String id;
         String description;
-        String typeCapsule = "";
         boolean approval = false;
         int option = 0;
+
+        System.out.println("Type the name project");
+        projectName= reader.next();
+
+        System.out.println("Type the name stage");
+        stageName = reader.next();
 
         System.out.println("Type id:");
         id = reader.next();
@@ -232,52 +230,65 @@ public class Main{
         System.out.println("4. Experience");
         option = reader.nextInt();
 
-        if(option == 1){
-            typeCapsule = "Technial";
-        }else if(option == 2 ){
-            typeCapsule = "Management";
-        }
-        else if(option == 3 ){
-            typeCapsule = "Control";
-        }
-        else if(option == 4 ){
-            typeCapsule = "Experience";
-        }
-
-        controller.addCapsule(id, description, typeCapsule, approval);
+        controller.addCapsule(projectName, stageName, id, description, option, approval);
 
     }
     
     public void addEmployee(){
+        String projectName;
+        String id;
         String name;
         String position;
+
+        System.out.println("Type the name project");
+        projectName = reader.next();
+
+        System.out.println("Type the id capsule");
+        id = reader.next();
 
         System.out.println("Type the name employee:");
         name = reader.next();
     
         System.out.println("Type the position employee:");
-        position =reader.next(); 
+        position = reader.next(); 
     
-        String msg = controller.addEmployee(name, position);
+        String msg = controller.addEmployee(projectName, id, name, position);
         System.out.println(msg);
 
     }
 
     public void approvalCapsule(){
+        String projectName;
+        String stageName;
         String id;
+
+        System.out.println("Type the name proyect");
+        projectName = reader.next();
+
+        System.out.println("Type the name stage");
+        stageName = reader.next();
 
         System.out.println("Type ID the capsule:");
         id = reader.next();
 
-        controller.approvalCapsule(id);
+        controller.approvalCapsule(projectName, stageName, id);
+
     }
     
     public void publicationCapsule(){
+        String projectName;
+        String stageName;
         String id;
+
+        System.out.println("Type the name project");
+        projectName = reader.next();
+
+        System.out.println("Type the name stage");
+        stageName = reader.next();
 
         System.out.println("Type ID the capsule:");
         id = reader.next();
 
-        controller.publicationCapsule(id);
+        controller.publicationCapsule(projectName, stageName, id);
     }
 }

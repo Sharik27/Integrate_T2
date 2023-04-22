@@ -5,16 +5,13 @@ import java.util.Calendar;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-
-
-
 public class Project{
 /**
  * SIZE the total number of project
  * SAGES the total number of stages 
  * */
-	private static final int SIZE = 10;
-	private static final int STAGES = 6;
+	private static final int MANAGER_SIZE = 10;
+	private static final int STAGES_SIZE = 6;
  
  
 	private String name;
@@ -25,7 +22,6 @@ public class Project{
 
 	private Manager[] managers;
 	private StageProject[] stageProjects;
-	private String[] stages;
 	private DateFormat formatter;
 
 /**
@@ -46,9 +42,8 @@ public class Project{
 		this.finalDate = finalDate;
 		this.budget = budget;
 
-		managers = new Manager [SIZE];
-		stageProjects = new StageProject[SIZE];
-		stages = new String[STAGES];
+		managers = new Manager [MANAGER_SIZE];
+		stageProjects = new StageProject[STAGES_SIZE];
 		
 	}
 
@@ -108,40 +103,38 @@ public class Project{
 		String msg = "Stages have not been created";
 		int pos = getFirstValidPositionStage(); 
 		if(pos != -1){
-			initStages();
 			stageProjects[pos] = stage; 
 			msg = "Stages added"; 
 		}
 
 		return msg;
 	}
-/**
- * initStages: show the 6 stages of the project
- * */
-	public void initStages(){
-		stages[0] = "Start"; 
-		stages[1] = "Analysis";
-		stages[2] = "Design";
-		stages[3] = "Execution";
-		stages[4] = "ClosureMonitoring";
-		stages[5] = "ProjectControl";
-	}
+
 /**
  * getFirstValidPosition: search in array if exist one valid position
  * @param nameStages to add the name stage
  * @return pos -1 if the position does not exist, a number in [0, 5] if exist a valid position
  * */
-	public  int searhStages(String nameStages){
+	public  int searhStages(String stageName){
 		boolean isFound= false;
 		int pos = -1;
-		for(int i = 0; i<SIZE && !isFound; i++){
-			if(stages[i].equalsIgnoreCase(nameStages)){
+		for(int i = 0; i<STAGES_SIZE && !isFound; i++){
+			if(stageProjects[i].getStageName().equalsIgnoreCase(stageName)){
 				isFound = true;
 				pos = i;
 			}
 		}
 		return pos;
 	}
+
+	public  int searhCapsule(String id){
+		int pos = -1;
+		for(int i = 0; i<MANAGER_SIZE; i++){
+			pos = stageProjects[i].searhCapsules(id);	
+		}
+		return pos;
+	}
+
 /**
  * culminateStage: the stage is completed
  * @param nameStages to add the name stages
@@ -151,8 +144,15 @@ public class Project{
 		String msg = "The stages has culminated";
 		int pos = searhStages(nameStages);
 		if(pos != -1){
-			stages[pos]="";
-			msg= "The stages has culminated";
+			if(stageProjects[pos]!= null){
+				if(stageProjects[pos].getStageStatus()!= "Desactivate"){
+					stageProjects[pos].setStageStatus("Desactivate");
+					stageProjects[pos+1].setStageStatus("Äctivate"); 
+					msg= "The stages has culminated";
+				}
+
+			}
+			
 		}
 
 		return msg;
@@ -165,7 +165,7 @@ public class Project{
 	public int getFirstValidPositionManager(){
 		int pos = -1; 
 		boolean isFound = false; 
-		for(int i = 0; i < SIZE && !isFound; i++){
+		for(int i = 0; i < MANAGER_SIZE && !isFound; i++){
 			if(managers[i] == null){
 				pos = i; 
 				isFound = true;
@@ -180,7 +180,7 @@ public class Project{
 	public int getFirstValidPositionStage(){
 		int pos = -1; 
 		boolean isFound = false; 
-		for(int i = 0; i < SIZE && !isFound; i++){
+		for(int i = 0; i < STAGES_SIZE && !isFound; i++){
 			if(stageProjects[i] == null){
 				pos = i; 
 				isFound = true;
@@ -188,6 +188,57 @@ public class Project{
 		}
 		return pos; 
 	}
+
+	public String addCapsule(String stageName, Capsule capsule){
+		int pos = searhStages(stageName);
+		String msg = "Capsule has not been added";
+
+		if(pos != -1){
+			if(stageProjects[pos] != null){
+				stageProjects[pos].addCapsule(capsule);
+				msg = "Capsule has been added";
+			}
+		}
+		return msg;
+
+	}
+
+	public String addEmployee(String id, Employee employee){
+		String msg = "";
+		int pos =searhCapsule(id);
+		if(pos!= -1){
+			if(stageProjects[pos]!= null){
+				msg= stageProjects[pos].addEmployee(id, employee);
+			} 
+		}
+		return msg;
+	}
+
+	public String publicationCapsule(String stageName, String id){
+		int pos = searhCapsule(id);
+		String msg = "The capsule could not be published";
+		if(pos!= -1){
+			if(stageProjects[pos]!= null){
+				msg= stageProjects[pos].publicationCapsule(id);
+			}
+
+		}
+		return msg;
+	}
+
+	public String approvalCapsule(String stageName, String id){
+		String msg = "The capsule has not been approved";
+		int pos = searhCapsule(id);
+
+		if(pos!= -1){
+			if(stageProjects[pos]!= null){
+				msg=stageProjects[pos].approvalCapsule(id);
+			}
+		}
+		return msg;
+	}
+
+	
 }
 
 

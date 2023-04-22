@@ -7,23 +7,38 @@ import java.util.Calendar;
 
 public class StageProject {
     
+	private String stageName;
+	private String stageStatus;
     private Calendar initialDate;
     private Calendar finalDate;
     private DateFormat formatter;
     private Capsule [] capsules;
 
-    private static final int SIZE = 50;
+    private static final int CAPSULE_SIZE = 50;
 /**
  * 
  * @param initialDate to add the initial date 
  * @param finalDate to add the final date
  * */
-    public StageProject(Calendar initialDate, Calendar finalDate){
+    public StageProject(String stageName, String stageStatus, Calendar initialDate, Calendar finalDate){
 
         this.formatter = new SimpleDateFormat("dd-MM-yyyy");
-        capsules = new Capsule [SIZE];
+
+		this.stageName = stageName;
+		this.stageStatus = stageStatus;
+		this.initialDate = initialDate;
+		this.finalDate = finalDate;
+        capsules = new Capsule [CAPSULE_SIZE];
 
     }
+
+	public String getStageName() {
+		return stageName;
+	}
+
+	public String getStageStatus() {
+		return stageStatus;
+	}	
 
     public String getInitialDateFormated(){
 		return formatter.format(this.initialDate.getTime());
@@ -32,6 +47,16 @@ public class StageProject {
 	public String getFinalDateFormated(){
 		return formatter.format(this.finalDate.getTime());
 	}	
+
+	public void setStageName(String stageName) {
+		this.stageName = stageName;
+	}
+
+	public void setStageStatus(String stageStatus) {
+		this.stageStatus = stageStatus;
+	}
+
+
 /**
  * 
  * @param capsule to add a capsule
@@ -51,7 +76,7 @@ public class StageProject {
     public int getFirstValidPositionCapsules(){
 		int pos = -1; 
 		boolean isFound = false; 
-		for(int i = 0; i < SIZE && !isFound; i++){
+		for(int i = 0; i < CAPSULE_SIZE && !isFound; i++){
 			if(capsules[i] == null){
 				pos = i; 
 				isFound = true;
@@ -82,7 +107,7 @@ public class StageProject {
     public  int searhCapsules(String id){
 		boolean isFound= false;
 		int pos = -1;
-		for(int i = 0; i<SIZE && !isFound; i++){
+		for(int i = 0; i<CAPSULE_SIZE && !isFound; i++){
 			if(capsules[i].getId().equalsIgnoreCase(id)){
 				isFound = true;
 				pos = i;
@@ -111,5 +136,16 @@ public class StageProject {
 
         return msg;
     }
+
+	public String addEmployee(String id, Employee employee){
+		String msg = "";
+		int pos = searhCapsules(id);
+		if(pos!= -1){
+			if(capsules[pos]!= null){
+				msg= capsules[pos].addEmployee(employee);
+			} 
+		}
+		return msg;
+	}
 
 }
