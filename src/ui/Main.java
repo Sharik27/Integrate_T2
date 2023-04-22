@@ -42,6 +42,7 @@ public class Main{
         System.out.println("3. Register capsule");
         System.out.println("4. Approval capsule ");
         System.out.println("5. Publication capsule");
+        System.out.println("6. Consult the amount of capsules for each type of capsule");
         System.out.println("0. Exit");
 	}
 // cases with their methods
@@ -68,6 +69,10 @@ public class Main{
 
             case 5:
             publicationCapsule();
+            break;
+
+            case 6:
+            consultAmountTypeCapsule();
             break;
 
 			case 0:
@@ -290,5 +295,20 @@ public class Main{
         id = reader.next();
 
         controller.publicationCapsule(projectName, stageName, id);
+    }
+
+    public void consultAmountTypeCapsule(){
+
+        String projectName;
+        String stageName;
+
+        System.out.println("Type the name project");
+        projectName= reader.next();
+
+        System.out.println("Type the name stage");
+        stageName= reader.next();
+
+        String msg = controller.consultAmountTypeCapsule(projectName, stageName);
+        System.out.println(msg);
     }
 }

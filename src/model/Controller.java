@@ -13,6 +13,11 @@ public class Controller {
 	private Project[] projects;
 	
 	private static final int PROJECT_SIZE = 10;
+
+	int countTechnical = 0;
+	int countManagment = 0;
+	int countDomain = 0;
+	int countExperiences = 0;
 	
 
 	public Controller() {
@@ -46,7 +51,7 @@ public class Controller {
  * @return is a message saying that the project is not registered
  * */
 	public String addManager(String projectName, String name, String phone){
-		int pos = searchProyect(projectName);
+		int pos = searchProject(projectName);
 		String msg = "No project registered";
 		if(pos !=-1){
 			if(projects[pos] != null){
@@ -80,7 +85,7 @@ public class Controller {
  * @return if the project is registered, the stage is created
  * */
 	public String addStage(String projectName, Calendar initialDate, Calendar finalDate){
-		int pos = searchProyect(projectName);
+		int pos = searchProject(projectName);
 		String msg = "No project registered";
 		
 		if(pos !=-1){
@@ -110,7 +115,7 @@ public class Controller {
 	 * @returnis a message that saving the stage is not registered
 	 * */
 	public String culminateStage(String projectName, String stageName){
-		int pos = searchProyect(projectName);
+		int pos = searchProject(projectName);
 		String msg = "No Stage registered";
 
 		if(pos !=-1){
@@ -131,7 +136,7 @@ public class Controller {
  * @return is a message where it says if the stage is not registered
  * */
 	public String addCapsule(String projectName, String stageName, String id, String description, int option, boolean approval){
-		int pos = searchProyect(projectName);
+		int pos = searchProject(projectName);
 		String msg = "";
 		
 		if( pos!= -1){
@@ -162,7 +167,7 @@ public class Controller {
  * @return is a message saying that the project is not registered
  * */
 	public String addEmployee(String projectName, String id,String name, String position){
-		int pos = searchProyect(projectName);
+		int pos = searchProject(projectName);
 		String msg = "No project registered";
 
 		if(pos!= -1){
@@ -181,7 +186,7 @@ public class Controller {
 	 * @return is a message saying that the capsule is not registered
 	 * */
 	public String approvalCapsule(String projectName, String stageName, String id){
-		int pos = searchProyect(projectName);
+		int pos = searchProject(projectName);
 		String msg = "No capsule registered";
 
 		if(pos!= -1){
@@ -199,7 +204,7 @@ public class Controller {
 	 * @return 
 	 * */
 	public String publicationCapsule(String projectName, String stageName, String id){
-		int pos = searchProyect(projectName);
+		int pos = searchProject(projectName);
 		String msg = "No stage registered";
 
 		if(pos != -1){
@@ -211,7 +216,7 @@ public class Controller {
 		return msg;
 	}
 
-	public int searchProyect(String projectName){
+	public int searchProject(String projectName){
 		boolean isFound = false;
 		int pos = -1;
 		for(int i = 0; i<PROJECT_SIZE && !isFound; i++){
@@ -222,5 +227,26 @@ public class Controller {
 		}
 		return pos;
 
+	}
+
+	public String consultAmountTypeCapsule(String projectName, String stageName){
+		String msgTechnical="";
+		String msgManagment = "";
+		String msgDomain = "";
+		String msgExperiences = "";
+		int pos = searchProject(projectName);
+
+		if(pos != -1){
+			if (projects[pos] != null){
+				msgTechnical = "The amount of technical capsules are: "+countTechnical;
+				msgManagment ="The amount of Management capsules are: "+countManagment;
+				msgDomain = "The aumount of Domain capsules are: "+countDomain;
+				msgExperiences = "The aumount of Experiences capsules are: "+countExperiences;
+			}
+			
+
+		}
+
+		return msgTechnical + "\n" + msgManagment + "\n" + msgDomain + "\n" + msgExperiences;
 	}
 }
