@@ -19,6 +19,7 @@ public class Project{
 	private Calendar initialDate;
 	private Calendar finalDate;
 	private double budget;
+	private int countAmountCapsule;
 
 	private Manager[] managers;
 	private StageProject[] stageProjects;
@@ -79,6 +80,10 @@ public class Project{
 		return "\nName: " + name + "\nClient: " + clientName + "\nInitial Date: " + getInitialDateFormated() + 
 		"\nFinal Date: " + getFinalDateFormated() + "\nTotalBudget: " + budget + ".\n";
 	}
+
+	public int getCountAmountCapsule() {
+		return countAmountCapsule;
+	}
 /**
  * 
  * @param manager to add a manager
@@ -136,7 +141,7 @@ public class Project{
 	}
 
 /**
- * culminateStage: the stage is completed
+ * culminateStage: the stage is completed by changing from active to inactive status 
  * @param nameStages to add the name stages
  * @return
  * */
@@ -189,6 +194,13 @@ public class Project{
 		return pos; 
 	}
 
+	/**
+	 * addCapsule: add a capsule to the project
+	 * @param stageName to add the stage name
+	 * @param capsule is a object of type Capsule
+	 * @return return a positive or negative message 
+	 */
+
 	public String addCapsule(String stageName, Capsule capsule){
 		int pos = searhStages(stageName);
 		String msg = "Capsule has not been added";
@@ -197,12 +209,20 @@ public class Project{
 			if(stageProjects[pos] != null){
 				stageProjects[pos].addCapsule(capsule);
 				msg = "Capsule has been added";
+				countAmountCapsule++;
 			}
+
 		}
 		return msg;
 
 	}
 
+	/**
+	 * addEmployee: add a employee
+	 * @param id to add the employee id
+	 * @param employee is a object of type Employee
+	 * @return return a positive or negative message 
+	 */
 	public String addEmployee(String id, Employee employee){
 		String msg = "";
 		int pos =searhCapsule(id);
@@ -213,6 +233,13 @@ public class Project{
 		}
 		return msg;
 	}
+
+	/**
+	 * publicationCapsule: to publication a capsule 
+	 * @param stageName to add the stage name
+	 * @param id to add the capsule id
+	 * @return return a positive or negative message 
+	 */
 
 	public String publicationCapsule(String stageName, String id){
 		int pos = searhCapsule(id);
@@ -226,6 +253,13 @@ public class Project{
 		return msg;
 	}
 
+	/**
+	 * approvalCapsule: approval of a capsule by means of stage name and identifier 
+	 * @param stageName to add the stage name
+	 * @param id to add the stage id
+	 * @return return a positive or negative message 
+	 */
+
 	public String approvalCapsule(String stageName, String id){
 		String msg = "The capsule has not been approved";
 		int pos = searhCapsule(id);
@@ -238,9 +272,15 @@ public class Project{
 		return msg;
 	}
 
+	/**
+	 * listAllCapsule: to show all capsules 
+	 * @param  to add the stage name 
+	 * @return the information of all the capsules in the stage
+	 */
+
 	public String listAllCapsule(String stageName){
 		int pos = searhStages(stageName);
-		String msg = stageProjects[pos].listCapsules()+"\n";
+		String msg = stageProjects[pos].listAllCapsules()+"\n";
 		return msg;
 	}
 

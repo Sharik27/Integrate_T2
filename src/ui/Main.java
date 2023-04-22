@@ -44,6 +44,8 @@ public class Main{
         System.out.println("5. Publication capsule");
         System.out.println("6. Consult the amount of capsules for each type of capsule");
         System.out.println("7. list of lessons learned");
+        System.out.println("8. Consult the name of the project with the most registered capsules");
+        System.out.println("9. Consult if a collaborator has registered capsules in any project");
         System.out.println("0. Exit");
 	}
 // cases with their methods
@@ -78,6 +80,14 @@ public class Main{
 
             case 7:
             listAllCapsule();
+            break;
+
+            case 8:
+            consultAmountCapsule();
+            break;
+
+            case 9:
+            seeRegisterCapsule();
             break;
 
 			case 0:
@@ -328,6 +338,38 @@ public class Main{
         stageName= reader.next();
 
         String msg = controller.consultCapsule(projectName, stageName);
+        System.out.println(msg);
+    }
+
+    public void consultAmountCapsule(){
+        String projectName;
+
+        System.out.println("Type the name project: ");
+        projectName = reader.next();
+
+        String msg = controller.consultAmountCapsule(projectName);
+        System.out.println(msg);
+    }
+
+    public void seeRegisterCapsule(){
+        String projectName;
+        String stageName;
+        String id;
+        String name;
+
+        System.out.println("Type the name project: ");
+        projectName = reader.next();
+
+        System.out.println("Type the name stage: ");
+        stageName = reader.next();
+
+        System.out.println("Type the id capsule: ");
+        id = reader.next();
+
+        System.out.println("Type the name employee: ");
+        name = reader.next();
+
+        String msg = controller.seeRegisterCapsule(projectName, stageName, id, name);
         System.out.println(msg);
     }
 

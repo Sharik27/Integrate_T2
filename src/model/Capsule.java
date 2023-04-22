@@ -76,6 +76,11 @@ public class Capsule {
 
 		return msg;
 	}
+    /**
+     * 
+     * @param name to searh for an employee by name 
+     * @return the employee's position in the arrangement
+     */
 
     public  int searhEmployee(String name){
 		boolean isFound= false;

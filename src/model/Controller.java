@@ -80,6 +80,7 @@ public class Controller {
 
 /**
  * addStage: add new stage to project 0
+ * @param projectName to add the name project
  * @param initialDate to add the initial date 
  * @param finalDateto add the final date 
  * @return if the project is registered, the stage is created
@@ -110,9 +111,9 @@ public class Controller {
 	}
 
 	/**
-	 * 
+	 * @param projectName to add the project name
 	 * @param stageName to add the stage name
-	 * @returnis a message that saving the stage is not registered
+	 * @return a message that saving the stage is not registered
 	 * */
 	public String culminateStage(String projectName, String stageName){
 		int pos = searchProject(projectName);
@@ -129,6 +130,8 @@ public class Controller {
 	}
 /**
  * addCapsule: add new capsule to stage 0
+ * @param projectName to add the project name
+ * @param stageName to add the stage name
  * @param id to add a unique identifier
  * @param description to add the description of a situation
  * @param typeCapusule to add a type of capsule
@@ -161,7 +164,8 @@ public class Controller {
 	}		
 	
 /**
- * 
+ * @param projectName to add the project name
+ * @param id to add the capsule id
  * @param name to add the employee name
  * @param position to add the employee position
  * @return is a message saying that the project is not registered
@@ -181,7 +185,9 @@ public class Controller {
 	}
 
 	/**
-	 * approvalCapsule: with the id approve the capsule 
+	 * approvalCapsule: with the id approve the capsule
+	 * @param projectName to add the project name
+	 * @param stageName to add the stage name 
 	 * @param id to add the capsule identifier and to know if it is approved
 	 * @return is a message saying that the capsule is not registered
 	 * */
@@ -201,7 +207,7 @@ public class Controller {
 	/**
 	 * publicationCapsule: publishes a capsule if approved
 	 * @param id to add an identifier to the capsule and know if it is approved for publication
-	 * @return 
+	 * @return return a positive or negative message
 	 * */
 	public String publicationCapsule(String projectName, String stageName, String id){
 		int pos = searchProject(projectName);
@@ -216,6 +222,12 @@ public class Controller {
 		return msg;
 	}
 
+	/**
+	 * 
+	 * @param projectName add the project name  to search for the project
+	 * @return the position of the project
+	 */
+
 	public int searchProject(String projectName){
 		boolean isFound = false;
 		int pos = -1;
@@ -228,6 +240,13 @@ public class Controller {
 		return pos;
 
 	}
+
+	/**
+	 * 
+	 * @param projectName to add the project name
+	 * @param stageName to add the stage name 
+	 * @return  the amount of capsules for each stage
+	 */
 
 	public String consultAmountTypeCapsule(String projectName, String stageName){
 		String msgTechnical="";
@@ -250,6 +269,13 @@ public class Controller {
 		return msgTechnical + "\n" + msgManagment + "\n" + msgDomain + "\n" + msgExperiences;
 	}
 
+	/**
+	 * 
+	 * @param projectName to add the project name
+	 * @param stageName to add the stage name
+	 * @return return a positive or negative message
+	 */
+
 	public String consultCapsule(String projectName, String stageName){
 		int pos = searchProject(projectName);
 		String msg = "";
@@ -264,6 +290,38 @@ public class Controller {
 		}
 		return msg;
 	} 
+
+	public String consultAmountCapsule(String projectName){
+		int pos = searchProject(projectName);
+		String msg= "";
+
+		for(int i=0; i<PROJECT_SIZE; i++){
+			if(projects[pos].getCountAmountCapsule()<projects[pos+1].getCountAmountCapsule()){
+				msg = "the project with the most capsule is: "+"\n"+projects[i].toString();
+			}
+		}
+		return msg;
+	}
+
+	/**
+	 * seeRegisterCapsule: This is to check if an employee has registered a capsule in a project.
+	 * @param projectName to add the name of the project
+	 * @param stageName to add the name of the stage
+	 * @param id to add the id of the capsule
+	 * @param name to add the name of the employee
+	 * @return if the employee has created a capsule
+	 */
+	public String seeRegisterCapsule(String projectName, String stageName, String id, String name){
+		int pos = searchProject(projectName);
+		String msg = "";
+
+		if(pos != -1){
+			if(projects[pos] != null){
+				msg = projects[pos].seeRegisterCapsule(stageName, id, name);
+			}
+		}
+		return msg;
+	}
 
 
 }

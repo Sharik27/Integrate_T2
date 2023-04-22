@@ -13,6 +13,7 @@ public class StageProject {
     private Calendar finalDate;
     private DateFormat formatter;
     private Capsule [] capsules;
+	private String seeRegisterCapsule = "false";
 
     private static final int CAPSULE_SIZE = 50;
 /**
@@ -48,6 +49,10 @@ public class StageProject {
 		return formatter.format(this.finalDate.getTime());
 	}	
 
+	public String getSeeRegisterCapsule() {
+		return seeRegisterCapsule;
+	}
+
 	public void setStageName(String stageName) {
 		this.stageName = stageName;
 	}
@@ -56,9 +61,12 @@ public class StageProject {
 		this.stageStatus = stageStatus;
 	}
 
+	public void setSeeRegisterCapsule(String seeRegisterCapsule) {
+		this.seeRegisterCapsule = seeRegisterCapsule;
+	}
 
 /**
- * 
+ * addCapsule: add a capsule to the project
  * @param capsule to add a capsule
  * @return is a message that saving capsule added
  * */
@@ -85,9 +93,9 @@ public class StageProject {
 		return pos; 
 	}
 /**
- * 
+ * approvalCapsule: see if the capsule is approved by the id
  * @param id to add the capsule identifier
- * @return
+ * @return return a positive or negative message 
  * */
     public String approvalCapsule(String id){
 		String msg = "Capsule have not been approval";
@@ -100,9 +108,9 @@ public class StageProject {
 		return msg;
 	}
 /**
- * 
+ * searhCapsule: searh of the capsule 
  * @param id to searh Capsule
- * @return
+ * @return the position of the capsule 
  * */
     public  int searhCapsules(String id){
 		boolean isFound= false;
@@ -115,6 +123,21 @@ public class StageProject {
 		}
 		return pos;
 	}
+
+	/**
+	 * searchEmployee: Search for a employee
+	 * @param name It will be the name of the employee
+	 * @return the position where the employee was located
+	 */
+	public  int searhEmployee(String name){
+		
+		int pos = -1;
+		for(int i = 0; i<CAPSULE_SIZE; i++){
+			pos = capsules[i].searhEmployee(name);
+		}
+		return pos;
+	}
+
 /**
  * 
  * @param id to publish a capsule if approved
@@ -137,18 +160,30 @@ public class StageProject {
         return msg;
     }
 
+	/**
+	 * addEmployee: add a employee
+	 * @param id to add the employee id
+	 * @param employee return a positive or negative message 
+	 * @return return a positive or negative message
+	 */
+
 	public String addEmployee(String id, Employee employee){
 		String msg = "";
 		int pos = searhCapsules(id);
 		if(pos!= -1){
 			if(capsules[pos]!= null){
 				msg= capsules[pos].addEmployee(employee);
+				seeRegisterCapsule = "true";
 			} 
 		}
 		return msg;
 	}
 
-	public String listCapsules(){
+	/**
+	 * listCapsules: show all capsules of a stage
+	 * @return the information of all the capsules in the stage
+	 */
+	public String listAllCapsules(){
 		String msg = "";
 
 		for(int i= 0; i<CAPSULE_SIZE; i++){
