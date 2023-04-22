@@ -104,4 +104,8 @@ public class Capsule {
 		}
 		return pos; 
 	}
+
+    public String toString(){
+        return "The id of capsule is: "+ getId()+ "\n"+ "The description of capsule is:"+ getDescription()+ "\n"+ "The type of capsule is: "+ getTypeCapsule();
+    }
 }

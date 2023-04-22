@@ -249,4 +249,21 @@ public class Controller {
 
 		return msgTechnical + "\n" + msgManagment + "\n" + msgDomain + "\n" + msgExperiences;
 	}
+
+	public String consultCapsule(String projectName, String stageName){
+		int pos = searchProject(projectName);
+		String msg = "";
+
+		if(pos!= -1){
+			for(int i= 0; i<PROJECT_SIZE; i++){
+				if(projects[pos]!= null){
+					msg+= projects[i].listAllCapsule(stageName)+"\n";
+				}
+			}
+
+		}
+		return msg;
+	} 
+
+
 }
