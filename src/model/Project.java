@@ -284,6 +284,50 @@ public class Project{
 		return msg;
 	}
 
+	/**
+	 * thisRegistredCapsule: thisRegistredCapsule: Is the query if an employee has registered a capsule in a project.
+	 * @param stageName to add the name of the stage
+	 * @param id to the id of the capsule
+	 * @param name to the name of the employee
+	 * @return if the employee has created a capsule
+	 */
+	public String seeRegisterCapsule(String stageName, String id, String name){
+		int pos = searhStages(stageName);
+		String msg = "";
+
+		if(pos != -1){
+			int posCapsule = stageProjects[pos].searhCapsules(id);
+			if(pos != -1){
+				int posEmployee = stageProjects[posCapsule].searhEmployee(name);
+				if(pos != -1){
+					stageProjects[posEmployee].getSeeRegisterCapsule();
+					msg = "hola";
+				}
+			}
+		}
+
+		return msg;
+	}
+
+	public  int searchCapsulesWithDescription(String description){
+		int pos = -1;
+		for(int i = 0; i<STAGES_SIZE; i++){
+			pos = stageProjects[i].searhCapsulesWithDescription(description);	
+		}
+		return pos;
+	}
+
+	public String consultCapsulePublished(String keyword){
+		String msg = "";
+		int pos = searchCapsulesWithDescription(keyword);
+
+		if(pos != -1){
+			msg = stageProjects[pos].consultCapsulePublished(keyword);
+		}
+
+		return msg;
+	}
+
 	
 }
 

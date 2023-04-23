@@ -153,6 +153,7 @@ public class StageProject {
          if (approval == true){
             System.out.println("www."+capsules[pos].getId()+".com");
             msg = "The capsule has publication";
+			capsules[pos].setPublication("true");
          }
         }
        
@@ -192,6 +193,44 @@ public class StageProject {
 			}
 		}
 		return msg;
+	}
+
+	/**
+	 * searhCapsulesWithDescription: consult the capsule with description
+	 * @param description to add the description of the capsule
+	 * @return the capsule to the capsule position
+	 */
+
+	public  int searhCapsulesWithDescription(String description){
+		boolean isFound= false;
+		int pos = -1;
+		for(int i = 0; i<CAPSULE_SIZE && !isFound; i++){
+			if(capsules[i].getDescription().equalsIgnoreCase(description)){
+				isFound = true;
+				pos = i;
+			}
+		}
+		return pos;
+	}
+
+	/**
+	 * consultCapsulePublished: consult the capsule published with the keywords
+	 * @param keyword to add a keyword
+	 * @return
+	 */
+
+	public String consultCapsulePublished(String keyword){
+		int pos = searhCapsulesWithDescription(keyword);
+		String msg = "";
+		boolean isExist = keyword.contains(String.valueOf("#"));
+
+		if(pos!= -1 && isExist == true){
+			if(capsules[pos].getApproval()== true && capsules[pos].getPublication()== "true"){
+				msg= capsules[pos].toString();
+			}
+		}
+		return msg;
+
 	}
 
 }

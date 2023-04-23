@@ -323,5 +323,25 @@ public class Controller {
 		return msg;
 	}
 
+	public  int searchCapsulesWithDescription(String description){
+		int pos = -1;
+		for(int i = 0; i<PROJECT_SIZE; i++){
+			pos = projects[i].searchCapsulesWithDescription(description);	
+		}
+		return pos;
+	}
+
+	public String consultCapsulePublished(String description){
+		String msg = "The capsule is not found";
+		int pos = searchCapsulesWithDescription(description);
+
+		if(pos != -1){
+			projects[pos].consultCapsulePublished(description);
+			msg = "";
+		}
+
+		return msg;
+	}
+
 
 }

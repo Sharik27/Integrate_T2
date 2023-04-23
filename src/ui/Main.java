@@ -46,6 +46,7 @@ public class Main{
         System.out.println("7. list of lessons learned");
         System.out.println("8. Consult the name of the project with the most registered capsules");
         System.out.println("9. Consult if a collaborator has registered capsules in any project");
+        System.out.println("10. consult published capsule");
         System.out.println("0. Exit");
 	}
 // cases with their methods
@@ -90,6 +91,10 @@ public class Main{
             seeRegisterCapsule();
             break;
 
+            case 10:
+            consultCapsulePublished();
+            break;
+
 			case 0:
 			System.out.println("exit");
 			break;
@@ -129,7 +134,7 @@ public class Main{
         System.out.println("Type the name of the project:");
         name = reader.next();
     
-        System.out.println("Type customer name:");
+        System.out.println("Type the name of the customer :");
         clientName = reader.next();
     
         System.out.println("After a few months, the project begins:");
@@ -160,7 +165,7 @@ public class Main{
         String name;
         String phone;
     
-        System.out.println("type the name project");
+        System.out.println("type the name of the project");
         projectName = reader.next();
 
         System.out.println("Type the name project manager:");
@@ -181,7 +186,7 @@ public class Main{
         int monthFinal;
         int monthFinal2 = 0;
 
-        System.out.println("Type the name project");
+        System.out.println("Type the name of the project: ");
         projectName = reader.next();
     
         System.out.println("After a few months, the stage begins:");
@@ -208,10 +213,10 @@ public class Main{
         String nameStage;
         Calendar finishStage;
 
-        System.out.println("Type the name project");
+        System.out.println("Type the name of the project: ");
         projectName= reader.next();
        
-        System.out.println("Type name stage:");
+        System.out.println("Type the name of the stage: ");
         nameStage = reader.next();
 
         finishStage = Calendar.getInstance();
@@ -231,16 +236,16 @@ public class Main{
         boolean approval = false;
         int option = 0;
 
-        System.out.println("Type the name project");
+        System.out.println("Type the name of the project");
         projectName= reader.next();
 
-        System.out.println("Type the name stage");
+        System.out.println("Type the name of the stage");
         stageName = reader.next();
 
-        System.out.println("Type id:");
+        System.out.println("Type the id  capsule: ");
         id = reader.next();
 
-        System.out.println("Type description:");
+        System.out.println("Type description capsule: ");
         description = reader.next();
 
         System.out.println("Type capsule:");
@@ -260,13 +265,13 @@ public class Main{
         String name;
         String position;
 
-        System.out.println("Type the name project");
+        System.out.println("Type the name of the project");
         projectName = reader.next();
 
         System.out.println("Type the id capsule");
         id = reader.next();
 
-        System.out.println("Type the name employee:");
+        System.out.println("Type the name of the employee:");
         name = reader.next();
     
         System.out.println("Type the position employee:");
@@ -282,13 +287,13 @@ public class Main{
         String stageName;
         String id;
 
-        System.out.println("Type the name proyect");
+        System.out.println("Type the name of the proyect");
         projectName = reader.next();
 
-        System.out.println("Type the name stage");
+        System.out.println("Type the name of the stage");
         stageName = reader.next();
 
-        System.out.println("Type ID the capsule:");
+        System.out.println("Type Id the capsule:");
         id = reader.next();
 
         controller.approvalCapsule(projectName, stageName, id);
@@ -300,13 +305,13 @@ public class Main{
         String stageName;
         String id;
 
-        System.out.println("Type the name project");
+        System.out.println("Type the name of the  project");
         projectName = reader.next();
 
-        System.out.println("Type the name stage");
+        System.out.println("Type the name of the stage");
         stageName = reader.next();
 
-        System.out.println("Type ID the capsule:");
+        System.out.println("Type Id the capsule:");
         id = reader.next();
 
         controller.publicationCapsule(projectName, stageName, id);
@@ -317,10 +322,10 @@ public class Main{
         String projectName;
         String stageName;
 
-        System.out.println("Type the name project");
+        System.out.println("Type the name of the project you want to consult");
         projectName= reader.next();
 
-        System.out.println("Type the name stage");
+        System.out.println("Type the name of the stage you want to consult ");
         stageName= reader.next();
 
         String msg = controller.consultAmountTypeCapsule(projectName, stageName);
@@ -331,10 +336,10 @@ public class Main{
         String projectName;
         String stageName;
 
-        System.out.println("Type the name project");
+        System.out.println("Type the name of the project you want to view capsules for");
         projectName = reader.next();
 
-        System.out.println("Type the stage name");
+        System.out.println("Type the name of the stage you want to view capsules for");
         stageName= reader.next();
 
         String msg = controller.consultCapsule(projectName, stageName);
@@ -344,7 +349,7 @@ public class Main{
     public void consultAmountCapsule(){
         String projectName;
 
-        System.out.println("Type the name project: ");
+        System.out.println("Type the name of the project you want to consult the amount of capsule: ");
         projectName = reader.next();
 
         String msg = controller.consultAmountCapsule(projectName);
@@ -357,7 +362,7 @@ public class Main{
         String id;
         String name;
 
-        System.out.println("Type the name project: ");
+        System.out.println("Type the name of the project project you want : ");
         projectName = reader.next();
 
         System.out.println("Type the name stage: ");
@@ -370,6 +375,16 @@ public class Main{
         name = reader.next();
 
         String msg = controller.seeRegisterCapsule(projectName, stageName, id, name);
+        System.out.println(msg);
+    }
+
+    public void consultCapsulePublished(){
+        String keyword;
+
+        System.out.println("write the key words with a # at the beginning and end of the word  ");
+        keyword = reader.next();
+
+        String msg = controller.consultCapsulePublished(keyword);
         System.out.println(msg);
     }
 

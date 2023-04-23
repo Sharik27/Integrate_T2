@@ -8,6 +8,7 @@ public class Capsule {
     private TypeCapsule typeCapsule;
     private boolean approval;
     private Employee[] employees;
+    private String publication = "false";
 /**
  * capsule: to create a new capsule
  * @param id to add a capsule identifier
@@ -43,6 +44,10 @@ public class Capsule {
         return approval;
     }
 
+    public String getPublication() {
+        return publication;
+    }
+
     public void setId(String id){
         this.id = id;
     }
@@ -60,6 +65,10 @@ public class Capsule {
 
     public void setApproval(boolean approval){
         this.approval = approval;
+    }
+
+    public void setPublication(String publication) {
+        this.publication = publication;
     }
 /**
  * 
